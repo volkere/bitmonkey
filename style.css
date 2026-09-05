@@ -34,6 +34,8 @@ pre{background:#1c1914;border:1px solid var(--line);border-radius:8px;
 .fuss{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:baseline;
   border-top:1px solid var(--line);padding-top:18px;margin-top:8px;
   font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.fuss .notiz{flex:1 1 100%;font-size:11px;line-height:1.45;color:var(--muted);
+  font-family:inherit;margin:0}
 a{color:var(--fg);text-underline-offset:3px}
 a:hover{color:var(--accent)}
 .punkt{color:var(--ok)}
