@@ -26,7 +26,7 @@ jobs:
       - name: Seite vorbereiten
         run: |
           mkdir -p _site
-          cp index.html leitstand.html findeapp.html style.css favicon.svg badge.svg _site/
+          cp index.html leitstand.html leitstand-demo.html findeapp.html style.css favicon.svg badge.svg _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
