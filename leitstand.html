@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis-Leitstand — bitmonkey</title>
+<meta name="description" content="Der Praxis-Leitstand nimmt Anrufe entgegen, transkribiert sie lokal und legt sie als Karten auf einem Board ab.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="blatt">
+  <div class="marke klein">
+    <a href="index.html"><img src="badge.svg" width="72" height="72" alt="bitmonkey"></a>
+    <div>
+      <h1>Praxis-Leitstand</h1>
+      <p class="zeile"><a href="index.html">bitmonkey</a> · Anruf-Board für die Praxis</p>
+    </div>
+  </div>
+
+  <p>Der Leitstand ist die Tresen-Ansicht für eingehende Praxisanrufe.
+    FreeSWITCH nimmt ab, eine lokale Pipe transkribiert und kategorisiert,
+    die Karte landet auf dem Board. Patientendaten bleiben auf dem Rechner.</p>
+
+  <h2>So läuft ein Anruf</h2>
+  <ol>
+    <li>Der Anruf kommt über den Praxis-Trunk, die Ansage läuft, die Aufnahme liegt im Eingang.</li>
+    <li>Whisper schreibt das Transkript, Ollama setzt Kategorie und Dringlichkeit.</li>
+    <li>Die Karte erscheint im <b>Eingang</b>. Von dort schiebt man sie nach
+      In Bearbeitung, Rückfragen, Erledigt, Archiviert.</li>
+  </ol>
+
+  <h2>Was die Karte zeigt</h2>
+  <ul>
+    <li>Name, Nummer, Anliegen, Stichworte und das Transkript</li>
+    <li>Kategorie (Termin, Rezept, Notfall …) und Dringlichkeit</li>
+    <li>Bearbeiter, interne Notiz, Rückruf-Status, Termin- oder Rezeptfelder</li>
+    <li>Notfall: rote Karte, Banner, Ton am Rechner</li>
+  </ul>
+
+  <h2>Tresen</h2>
+  <p>Suche und Filter, Übergabe (offene Rückrufe und Notfälle),
+    „Ich nehme das“, Drucken, Sprechzeiten-Routing und Löschfrist nach dem Archivieren.
+    Mehrere Arbeitsplätze können sich mit eigenen Kennungen anmelden.</p>
+
+  <div class="links">
+    <a class="karte" href="https://volkere.github.io/paxis-telefon-leitstand/">
+      <b>Interaktive Demo</b>
+      <span>Aufnahmen anhören, dann Karten schieben — nichts wird gespeichert.</span>
+    </a>
+    <a class="karte" href="https://github.com/volkere/paxis-telefon-leitstand">
+      <b>Quellcode</b>
+      <span>github.com/volkere/paxis-telefon-leitstand</span>
+    </a>
+  </div>
+
+  <div class="fuss">
+    <a href="index.html">← bitmonkey</a>
+    <a href="findeapp.html">FindeApp</a>
+  </div>
+</main>
+</body>
+</html>

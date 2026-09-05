@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FindeApp — bitmonkey</title>
+<meta name="description" content="FindeApp merkt sich Ablageorte per Sprache oder Text und findet sie wieder — lokal auf dem iPhone, ohne Cloud.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="blatt">
+  <div class="marke klein">
+    <a href="index.html"><img src="badge.svg" width="72" height="72" alt="bitmonkey"></a>
+    <div>
+      <h1>FindeApp</h1>
+      <p class="zeile"><a href="index.html">bitmonkey</a> · Dinge wiederfinden, lokal</p>
+    </div>
+  </div>
+
+  <p>Finde ist eine native iOS-App. Du sagst oder schreibst, wo etwas liegt.
+    Später fragst du danach — die App antwortet mit dem gemerkten Ort
+    und liest ihn vor. Kein eigener Server, keine Cloud-KI.</p>
+
+  <h2>Ablegen</h2>
+  <pre>Ich habe die Gürtellochpresse in das Gartenhaus
+an der Werkzeugwand abgelegt</pre>
+  <p class="muted">Oder kürzer: „Der Akkuschrauber liegt im Kellerregal.“
+    Der Gegenstand erscheint unter „Gemerkte Dinge“.</p>
+
+  <h2>Wiederfinden</h2>
+  <pre>Wo ist die Presse?</pre>
+  <p>Die Suche trifft auch Teile: <code>Presse</code> findet
+    <code>Gürtellochpresse</code>. Wenn das lokale Systemmodell da ist,
+    gelten Umschreibungen als Alias — etwa „Werkzeug für Lederlöcher“.</p>
+
+  <h2>Wo es bleibt</h2>
+  <ul>
+    <li>SwiftData auf dem Gerät</li>
+    <li>Verstehen über Apple Foundation Models, sonst ein regelbasierter Parser</li>
+    <li>Spracheingabe und -ausgabe auf Deutsch</li>
+    <li>Nichts verlässt das iPhone</li>
+  </ul>
+
+  <p class="muted">Braucht aktuelles Xcode und iOS. Spracheingabe sitzt
+    auf einem echten iPhone zuverlässiger als im Simulator.</p>
+
+  <div class="links">
+    <a class="karte" href="https://github.com/volkere/FindeApp">
+      <b>Quellcode</b>
+      <span>github.com/volkere/FindeApp · Bundle com.volkere.finde</span>
+    </a>
+    <a class="karte" href="https://github.com/volkere/FindeApp/blob/main/README.md">
+      <b>Bedienung</b>
+      <span>Beispiele, Build und Grenzen stehen im README.</span>
+    </a>
+  </div>
+
+  <div class="fuss">
+    <a href="index.html">← bitmonkey</a>
+    <a href="leitstand.html">Leitstand</a>
+  </div>
+</main>
+</body>
+</html>
