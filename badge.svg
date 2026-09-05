@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="bitmonkey Wuppertal">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="bitmonkey software">
   <defs>
     <path id="ring-oben" d="M 64,200 A 136,136 0 1,1 336,200"/>
     <path id="ring-unten" d="M 58,200 A 142,142 0 0,0 342,200"/>
@@ -15,7 +15,7 @@
     <textPath href="#ring-oben" startOffset="50%" text-anchor="middle">BITMONKEY</textPath>
   </text>
   <text font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="20" letter-spacing="8" fill="#e07a2f">
-    <textPath href="#ring-unten" startOffset="50%" text-anchor="middle">WUPPERTAL</textPath>
+    <textPath href="#ring-unten" startOffset="50%" text-anchor="middle">SOFTWARE</textPath>
   </text>
   <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#e07a2f" letter-spacing="3">
     <textPath href="#ring-bits" startOffset="0">01001101 01101111 01101110 01101011 01100101 01111001 01</textPath>

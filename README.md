@@ -1,4 +1,4 @@
-# bitmonkey
+# bitmonkey software
 
 Öffentliche Seite: **https://volkere.github.io/bitmonkey/**
 
