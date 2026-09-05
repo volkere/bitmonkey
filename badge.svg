@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="bitmonkey Wuppertal">
+  <defs>
+    <path id="ring-oben" d="M 64,200 A 136,136 0 1,1 336,200"/>
+    <path id="ring-unten" d="M 58,200 A 142,142 0 0,0 342,200"/>
+    <path id="ring-bits" d="M 96,200 A 104,104 0 1,1 304,200 A 104,104 0 1,1 96,200"/>
+  </defs>
+
+  <circle cx="200" cy="200" r="196" fill="#efe6d4"/>
+  <circle cx="200" cy="200" r="188" fill="none" stroke="#1a1610" stroke-width="8"/>
+  <circle cx="200" cy="200" r="172" fill="none" stroke="#e07a2f" stroke-width="14"/>
+  <circle cx="200" cy="200" r="160" fill="none" stroke="#1a1610" stroke-width="4"/>
+  <circle cx="200" cy="200" r="148" fill="#1c1914"/>
+
+  <text font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="28" letter-spacing="6" fill="#1a1610">
+    <textPath href="#ring-oben" startOffset="50%" text-anchor="middle">BITMONKEY</textPath>
+  </text>
+  <text font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="20" letter-spacing="8" fill="#e07a2f">
+    <textPath href="#ring-unten" startOffset="50%" text-anchor="middle">WUPPERTAL</textPath>
+  </text>
+  <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#e07a2f" letter-spacing="3">
+    <textPath href="#ring-bits" startOffset="0">01001101 01101111 01101110 01101011 01100101 01111001 01</textPath>
+  </text>
+
+  <!-- Schaltpfade -->
+  <g fill="none" stroke="#e07a2f" stroke-width="3" stroke-linecap="square">
+    <path d="M 78 168 H 118 V 148 H 138"/>
+    <path d="M 78 232 H 110 V 252 H 132"/>
+    <path d="M 322 168 H 282 V 148 H 262"/>
+    <path d="M 322 232 H 290 V 252 H 268"/>
+  </g>
+  <g fill="#e07a2f">
+    <rect x="72" y="162" width="12" height="12"/>
+    <rect x="72" y="226" width="12" height="12"/>
+    <rect x="316" y="162" width="12" height="12"/>
+    <rect x="316" y="226" width="12" height="12"/>
+    <rect x="132" y="142" width="10" height="10"/>
+    <rect x="126" y="246" width="10" height="10"/>
+    <rect x="258" y="142" width="10" height="10"/>
+    <rect x="264" y="246" width="10" height="10"/>
+  </g>
+
+  <!-- Ohren -->
+  <ellipse cx="128" cy="176" rx="26" ry="30" fill="#3d2a18" stroke="#1a1610" stroke-width="3"/>
+  <ellipse cx="272" cy="176" rx="26" ry="30" fill="#3d2a18" stroke="#1a1610" stroke-width="3"/>
+  <ellipse cx="128" cy="178" rx="14" ry="16" fill="#c96a28"/>
+  <ellipse cx="272" cy="178" rx="14" ry="16" fill="#c96a28"/>
+
+  <!-- Kopf -->
+  <ellipse cx="200" cy="198" rx="72" ry="76" fill="#4a321c" stroke="#1a1610" stroke-width="3"/>
+  <ellipse cx="200" cy="210" rx="50" ry="52" fill="#efe6d4"/>
+
+  <!-- Augen -->
+  <ellipse cx="176" cy="190" rx="13" ry="15" fill="#fff8ea" stroke="#1a1610" stroke-width="2.2"/>
+  <ellipse cx="224" cy="190" rx="13" ry="15" fill="#fff8ea" stroke="#1a1610" stroke-width="2.2"/>
+  <circle cx="178" cy="192" r="6.2" fill="#1a1610"/>
+  <circle cx="226" cy="192" r="6.2" fill="#1a1610"/>
+  <circle cx="180" cy="190" r="2" fill="#efe6d4"/>
+  <circle cx="228" cy="190" r="2" fill="#efe6d4"/>
+
+  <!-- Nase -->
+  <ellipse cx="200" cy="214" rx="9" ry="6" fill="#1a1610"/>
+
+  <!-- Grinsen -->
+  <path d="M162 228 Q200 258 238 228 Q200 246 162 228Z" fill="#1a1610"/>
+
+  <!-- Zunge = Bits -->
+  <path d="M188 242 C194 268 226 292 246 318 C254 330 238 336 228 324 C204 300 186 272 186 246Z" fill="#e07a2f" stroke="#1a1610" stroke-width="2"/>
+  <g fill="#1a1610" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="700">
+    <text x="196" y="262">1</text>
+    <text x="208" y="274">0</text>
+    <text x="216" y="288">1</text>
+    <text x="224" y="302">0</text>
+    <text x="230" y="316">1</text>
+  </g>
+</svg>
