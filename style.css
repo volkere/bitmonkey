@@ -32,7 +32,7 @@ pre,code{font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}
 pre{background:#1c1914;border:1px solid var(--line);border-radius:8px;
   padding:12px 14px;overflow:auto;margin:0 0 16px;color:var(--fg)}
 .notiz{font-size:11px;line-height:1.45;color:var(--muted);margin:4px 0 18px}
-.notiz sup{font-size:8px;line-height:0;position:relative;top:-0.35em;margin-right:1px}
+.stern{font-size:.7em;font-weight:400;line-height:1;position:relative;top:-0.15em;margin:0 1px}
 .fuss{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:baseline;
   border-top:1px solid var(--line);padding-top:18px;margin-top:0;
   font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
