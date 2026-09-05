@@ -35,6 +35,12 @@ pre{background:#1c1914;border:1px solid var(--line);border-radius:8px;
 a{color:var(--fg);text-underline-offset:3px}
 a:hover{color:var(--accent)}
 .punkt{color:var(--ok)}
+.station{border-top:1px solid var(--line);padding:14px 0}
+.station:first-of-type{border-top:0;padding-top:0}
+.station .wann{color:var(--accent);font:12px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.04em;text-transform:uppercase}
+.station h3{font-size:17px;margin:4px 0 2px}
+.station .ort{color:var(--muted);font-size:13.5px;margin:0 0 8px}
 @media(max-width:640px){
   h1{font-size:32px}
   .marke{flex-direction:column;align-items:flex-start;gap:16px}
