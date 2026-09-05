@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finde — macOS-Demo · bitmonkey software</title>
+<meta name="description" content="FindeApp-Demo im Browser: Ort merken, wiederfinden, lokal. Für macOS.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --page:#12110e; --ink:#efe6d4; --muted:#9a8f7a; --accent:#e07a2f;
+  --win:#ececee; --bar:#d8d8dc; --card:#fff; --text:#1d1d1f; --sub:#6e6e73;
+  --line:rgba(0,0,0,.08); --blue:#0071e3; --green:#1f9d55; --red:#e11d2e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--page);color:var(--ink);
+  font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+body{min-height:100vh;padding:28px 16px 40px}
+.zurueck{display:block;width:min(820px,100%);margin:0 auto 14px;
+  color:var(--muted);text-decoration:none;font:13px/1.3 ui-monospace,Menlo,monospace}
+.zurueck:hover{color:var(--accent)}
+.fenster{width:min(820px,100%);margin:0 auto;background:var(--win);color:var(--text);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06)}
+.titelleiste{background:linear-gradient(#e8e8ea,#d4d4d8);padding:10px 14px 9px;
+  display:flex;align-items:center;gap:8px;border-bottom:1px solid #c8c8cc;
+  user-select:none}
+.ampel{display:flex;gap:7px}
+.ampel i{width:12px;height:12px;border-radius:50%;display:block}
+.ampel .r{background:#ff5f57}.ampel .g{background:#febc2e}.ampel .b{background:#28c840}
+.titel{flex:1;text-align:center;font-size:13px;font-weight:600;color:#3a3a3c;margin-right:50px}
+.inhalt{padding:18px 18px 22px;max-height:calc(100vh - 140px);overflow:auto}
+.status{background:var(--card);border-radius:16px;padding:16px 18px;margin-bottom:14px;
+  box-shadow:0 1px 0 var(--line)}
+.status .lage{font-size:12px;color:var(--sub);margin-bottom:6px}
+.status .antwort{font-size:20px;font-weight:650;letter-spacing:-.02em}
+.status .modus{font-size:12px;color:var(--sub);margin-top:6px}
+.karten{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.karte{background:var(--card);border-radius:16px;padding:16px 16px 14px;
+  box-shadow:0 1px 0 var(--line)}
+.nr{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-weight:700;font-size:14px;margin-bottom:8px}
+.nr.blau{background:var(--blue)}.nr.gruen{background:var(--green)}
+.karte h2{font-size:17px;margin:0 0 4px}
+.karte p{margin:0 0 8px;color:var(--sub);font-size:13.5px}
+.karte .bsp{font-size:12.5px;color:#8a8a8e;margin-bottom:12px}
+button{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:10px;
+  padding:10px 12px;width:100%;cursor:pointer}
+button.blau{background:var(--blue);color:#fff}
+button.gruen{background:var(--green);color:#fff}
+button.rot{background:var(--red);color:#fff}
+button.grau{background:#e8e8ed;color:var(--text)}
+button:disabled{opacity:.45;cursor:default}
+.tippen{background:var(--card);border-radius:16px;padding:16px;margin-bottom:16px;
+  box-shadow:0 1px 0 var(--line)}
+.tippen h2{font-size:16px;margin:0 0 8px}
+.tippen textarea{width:100%;min-height:56px;resize:vertical;font:inherit;font-size:16px;
+  border:1px solid #d2d2d7;border-radius:10px;padding:8px 10px;margin-bottom:10px}
+.liste h2{font-size:16px;margin:4px 0 10px}
+.ding{background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px;
+  display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 0 var(--line)}
+.ding b{display:block;font-size:15px}
+.ding span{color:var(--sub);font-size:13.5px}
+.ding button{width:auto;padding:6px 10px;font-size:12px;flex:none}
+.leer{color:var(--sub);font-size:13.5px;padding:8px 2px}
+.transkript{background:#dcecff;border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.transkript b{display:block;font-size:12px;color:#3a6ea5;margin-bottom:4px}
+@media(max-width:700px){.karten{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="zurueck" href="findeapp.html">← FindeApp · bitmonkey software</a>
+<div class="fenster" role="application" aria-label="Finde macOS-Demo">
+  <div class="titelleiste">
+    <div class="ampel" aria-hidden="true"><i class="r"></i><i class="g"></i><i class="b"></i></div>
+    <div class="titel">Finde</div>
+  </div>
+  <div class="inhalt">
+    <div class="status">
+      <div class="lage" id="lage">Bereit</div>
+      <div class="antwort" id="antwort">Sag oder schreib, wo etwas liegt — oder frag danach.</div>
+      <div class="modus">macOS-Demo · alles bleibt in diesem Fenster · keine Cloud</div>
+    </div>
+    <div class="transkript" id="live" hidden>
+      <b>Ich habe verstanden:</b>
+      <div id="liveText">…</div>
+    </div>
+    <div class="karten">
+      <div class="karte">
+        <div class="nr blau">1</div>
+        <h2>Ort merken</h2>
+        <p>Sprich, wo du etwas abgelegt hast.</p>
+        <div class="bsp">Beispiel: Die Presse liegt im Gartenhaus.</div>
+        <button class="blau" id="merkBtn" type="button">Ort per Sprache merken</button>
+      </div>
+      <div class="karte">
+        <div class="nr gruen">2</div>
+        <h2>Etwas suchen</h2>
+        <p>Stell die Frage. Finde sucht in den gemerkten Dingen.</p>
+        <div class="bsp">Beispiel: Wo ist die Presse?</div>
+        <button class="gruen" id="suchBtn" type="button">Frage per Sprache stellen</button>
+      </div>
+    </div>
+    <div class="tippen">
+      <h2>Oder eintippen</h2>
+      <textarea id="eingabe" placeholder="Zum Beispiel: Wo ist die Presse?"></textarea>
+      <button class="grau" id="tippBtn" type="button">Eingabe verarbeiten</button>
+    </div>
+    <div class="liste" id="trefferBox" hidden>
+      <h2>Gefundene Treffer</h2>
+      <div id="treffer"></div>
+    </div>
+    <div class="liste">
+      <h2>Gemerkte Dinge</h2>
+      <div id="dinge"></div>
+    </div>
+  </div>
+</div>
+<script>
+const STOP=new Set(['der','die','das','den','dem','ein','eine','einen','einem','mein','meine','meinen','meinem','wo','ist','sind','liegt','liegen','steht','stehen','ich','habe','hab','suche','finde']);
+const STORE=[
+  /^\s*(?:ich\s+habe|ich\s+hab)\s+(.+?)\s+((?:in|ins|im|an|am|auf|bei|unter|neben|hinter|vor)\s+.+?)(?:\s+(?:abgelegt|gelegt|hingelegt|gestellt|verstaut|deponiert|getan|gepackt|geraeumt|geräumt))?\s*[.!?]?\s*$/i,
+  /^\s*(?:ich\s+lege|ich\s+stell(?:e)?|ich\s+packe|ich\s+raeume|ich\s+räume)\s+(.+?)\s+((?:in|ins|im|an|am|auf|bei|unter|neben|hinter|vor)\s+.+?)\s*[.!?]?\s*$/i,
+  /^\s*(?:merke\s+dir|merk\s+dir|speichere|notiere)\s*:?\s*(.+?)\s+(?:ist|liegt|steht)\s+((?:in|ins|im|an|am|auf|bei|unter|neben|hinter|vor)\s+.+?)\s*[.!?]?\s*$/i,
+  /^\s*(.+?)\s+(?:liegt|steht|ist)\s+((?:in|ins|im|an|am|auf|bei|unter|neben|hinter|vor)\s+.+?)\s*[.!?]?\s*$/i
+];
+const FIND=[
+  /^\s*wo\s+(?:ist|sind|liegt|liegen|steht|stehen)\s+(?:der|die|das|den|dem|ein|eine|einen|mein|meine|meinen|meinem)?\s*(.+?)\s*[?!.]?\s*$/i,
+  /^\s*wo\s+habe\s+ich\s+(?:der|die|das|den|dem|ein|eine|einen|mein|meine|meinen|meinem)?\s*(.+?)\s+(?:abgelegt|gelegt|hingelegt|gestellt|verstaut|deponiert)\s*[?!.]?\s*$/i,
+  /^\s*(?:ich\s+suche|suche|finde)\s+(?:der|die|das|den|dem|ein|eine|einen|mein|meine|meinen|meinem)?\s*(.+?)\s*[?!.]?\s*$/i
+];
+
+function trim(s){return String(s||'').replace(/\s+/g,' ').trim()}
+function ohneArtikel(s){return trim(s).replace(/^(?:der|die|das|den|dem|ein|eine|einen|einem|mein|meine|meinen|meinem)\s+/i,'')}
+function norm(s){return ohneArtikel(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9äöüß\s]/g,' ').replace(/\s+/g,' ').trim()}
+function tokens(s){return norm(s).split(' ').filter(t=>t&&!STOP.has(t))}
+
+function parse(text){
+  const t=trim(text);
+  if(!t)return {art:'unknown',text:t};
+  for(const re of STORE){
+    const m=t.match(re);
+    if(m){
+      const name=ohneArtikel(m[1]), ort=trim(m[2]).replace(/[.!?]+$/,'');
+      if(name&&ort)return {art:'store',name,ort,text:t};
+    }
+  }
+  for(const re of FIND){
+    const m=t.match(re);
+    if(m){
+      const q=ohneArtikel(m[1]);
+      if(q)return {art:'find',query:q,text:t};
+    }
+  }
+  return {art:'unknown',text:t};
+}
+
+function score(query,item){
+  const q=norm(query), qt=tokens(query);
+  const hay=[item.name,item.ort,item.kontext,(item.aliases||[]).join(' ')].map(norm);
+  let best=0;
+  for(const h of hay){
+    if(!h)continue;
+    if(h===q)best=Math.max(best,1);
+    else if(h.includes(q)||q.includes(h))best=Math.max(best,0.82);
+    else{
+      const ht=h.split(' ').filter(Boolean);
+      const hit=qt.filter(t=>ht.some(x=>x.includes(t)||t.includes(x))).length;
+      if(qt.length)best=Math.max(best,hit/qt.length*0.75);
+    }
+  }
+  return best;
+}
+
+let dinge=[
+  {id:1,name:'Gürtellochpresse',ort:'im Gartenhaus an der Werkzeugwand',kontext:'Die Presse liegt im Gartenhaus.',aliases:['presse']},
+  {id:2,name:'Akkuschrauber',ort:'im Kellerregal',kontext:'Der Akkuschrauber liegt im Kellerregal.',aliases:[]}
+];
+let nextId=3, rec=null, modus=null;
+
+function sprechen(text){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='de-DE'; u.rate=1.02;
+  speechSynthesis.speak(u);
+}
+function setStatus(lage,antwort){
+  document.getElementById('lage').textContent=lage;
+  document.getElementById('antwort').textContent=antwort;
+}
+function zeichne(){
+  const box=document.getElementById('dinge');
+  if(!dinge.length){
+    box.innerHTML='<p class="leer">Noch nichts gespeichert. Sag zum Beispiel: Die Presse liegt im Gartenhaus.</p>';
+    return;
+  }
+  box.innerHTML=dinge.map(d=>`<div class="ding">
+    <div><b>${esc(d.name)}</b><span>${esc(d.ort)}</span></div>
+    <button class="grau" type="button" data-del="${d.id}">Löschen</button>
+  </div>`).join('');
+  box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{
+    dinge=dinge.filter(x=>x.id!==Number(b.dataset.del));
+    zeichne(); setStatus('Bereit','Eintrag gelöscht.');
+  });
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function verarbeite(text){
+  const p=parse(text);
+  document.getElementById('trefferBox').hidden=true;
+  if(p.art==='store'){
+    const alt=dinge.find(d=>norm(d.name)===norm(p.name));
+    if(alt){alt.ort=p.ort;alt.kontext=p.text}
+    else dinge.unshift({id:nextId++,name:p.name,ort:p.ort,kontext:p.text,aliases:[]});
+    const antwort=`Gespeichert: ${p.name} — ${p.ort}.`;
+    setStatus('Gespeichert',antwort); sprechen(antwort); zeichne(); return;
+  }
+  if(p.art==='find'){
+    const hits=dinge.map(d=>({d,s:score(p.query,d)})).filter(x=>x.s>=0.45).sort((a,b)=>b.s-a.s);
+    if(!hits.length){
+      const antwort=`Ich habe ${p.query} nicht gefunden.`;
+      setStatus('Nichts gefunden',antwort); sprechen(antwort); return;
+    }
+    const antwort=`${hits[0].d.name} liegt ${hits[0].d.ort}.`;
+    setStatus('Gefunden',antwort); sprechen(antwort);
+    document.getElementById('trefferBox').hidden=false;
+    document.getElementById('treffer').innerHTML=hits.map(h=>`<div class="ding">
+      <div><b>${esc(h.d.name)}</b><span>${esc(h.d.ort)} · Treffer ${Math.round(h.s*100)}%</span></div>
+    </div>`).join('');
+    return;
+  }
+  const antwort='Das habe ich nicht verstanden. Sag zum Beispiel: Die Presse liegt im Gartenhaus — oder: Wo ist die Presse?';
+  setStatus('Nicht verstanden',antwort); sprechen(antwort);
+}
+
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function erkenner(){
+  if(!SR)return null;
+  const r=new SR(); r.lang='de-DE'; r.interimResults=true; r.continuous=true;
+  return r;
+}
+function stopRec(){
+  if(rec){try{rec.stop()}catch(e){} rec=null}
+  modus=null;
+  document.getElementById('live').hidden=true;
+  document.getElementById('merkBtn').textContent='Ort per Sprache merken';
+  document.getElementById('merkBtn').className='blau';
+  document.getElementById('suchBtn').textContent='Frage per Sprache stellen';
+  document.getElementById('suchBtn').className='gruen';
+}
+function startRec(art){
+  const r=erkenner();
+  if(!r){setStatus('Hinweis','Spracheingabe braucht Safari oder Chrome auf dem Mac. Tippe den Satz ins Feld.');return}
+  stopRec();
+  modus=art; rec=r;
+  document.getElementById('live').hidden=false;
+  document.getElementById('liveText').textContent='Ich höre zu…';
+  setStatus('Aufnahme','Ich höre zu…');
+  if(art==='store'){
+    document.getElementById('merkBtn').textContent='Stoppen und merken';
+    document.getElementById('merkBtn').className='rot';
+  }else{
+    document.getElementById('suchBtn').textContent='Stoppen und suchen';
+    document.getElementById('suchBtn').className='rot';
+  }
+  let final='';
+  r.onresult=e=>{
+    let t='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      t+=e.results[i][0].transcript;
+      if(e.results[i].isFinal)final+=e.results[i][0].transcript+' ';
+    }
+    document.getElementById('liveText').textContent=trim(final||t)||'Ich höre zu…';
+  };
+  r.onerror=()=>{stopRec(); setStatus('Hinweis','Spracheingabe abgebrochen. Tippe den Satz ins Feld.')};
+  r.start();
+}
+function toggle(art){
+  if(rec&&modus===art){
+    const text=trim(document.getElementById('liveText').textContent);
+    stopRec();
+    if(text&&text!=='Ich höre zu…')verarbeite(text);
+    return;
+  }
+  startRec(art);
+}
+
+document.getElementById('merkBtn').onclick=()=>toggle('store');
+document.getElementById('suchBtn').onclick=()=>toggle('find');
+document.getElementById('tippBtn').onclick=()=>{
+  const t=trim(document.getElementById('eingabe').value);
+  if(!t)return;
+  verarbeite(t);
+};
+document.getElementById('eingabe').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('tippBtn').click()}
+});
+zeichne();
+</script>
+</body>
+</html>
